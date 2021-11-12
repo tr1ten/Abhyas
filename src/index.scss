@@ -1,9 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body{
     @apply w-full font-mono;
 }
+
 .move-me:hover {
     transform: translate(4px,4px);
     cursor: pointer;

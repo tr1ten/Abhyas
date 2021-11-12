@@ -4,7 +4,6 @@ import Line from "../components/UI/line";
 import { useSelector } from "react-redux";
 const Home = (props) => {
     const items = useSelector((state)=>state.mock.items)
-    console.log('here items',items)
     return (
         <>
             < Header />

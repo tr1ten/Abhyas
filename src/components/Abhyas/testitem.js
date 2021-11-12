@@ -47,7 +47,7 @@ const Test = (props) => {
                     <p>Sno.{props.tid}</p>
                 </div>
                 <h3>{props.title}</h3>
-                <Button onClick={openModal} className="p-2 bg-secondary m-1 text-white hover:text-gray-200">
+                <Button onClick={openModal} className=" bg-secondary m-1 text-white hover:text-gray-200">
                     Start
                 </Button>
 

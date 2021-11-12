@@ -1,3 +1,5 @@
+import Choices from "./choices";
+
 const QuesCard= (props)=>{
     return (
         <div className='m-4 p-2 shadow-md bg-white rounded-md'>
@@ -11,14 +13,7 @@ const QuesCard= (props)=>{
                 </p>
             </div>
             {Object.keys(props.choices).map((key)=>{
-                return (
-                    <div className="flex w-full border-2 border-solid items-center hover:bg-green-500">
-                        {/* group hover not working fix it :, */}
-                        <p className="rounded-full p-1 m-2 bg-gray-300 ">{key}</p>
-                        <div>{props.choices[key]} </div>
-
-                    </div>
-                )
+                return (<Choices key={'choice'+key} kkey={key} onClick={()=>props.onSelectAnswer(key)} isRightAnswer={props.selectedAnswer===key} choices={props.choices} /> )
             })}
 
 

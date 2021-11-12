@@ -14,9 +14,10 @@ const customStyles = {
 };
 
 const MModal = (props) => {
-
+    const el = document.getElementById('#root');
 
     function afterOpenModal() {
+        
         // references are now sync'd and can be accessed.
         return;
     }
@@ -25,6 +26,7 @@ const MModal = (props) => {
 
     return (
         <Modal
+            appElement={el}
             isOpen={props.openModal}
             onAfterOpen={afterOpenModal}
             onRequestClose={props.onClose}
