@@ -1,23 +1,29 @@
 import THeader from "../components/Test/header";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate ,usePrompt} from 'react-router-dom';
 import { useSelector } from "react-redux";
 import QuesCard from "../components/Test/question";
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import DisplayQues from "../components/Test/displayques";
-import { getSubjectKey, getSummary } from "../utils/test";
+import { getSubjectKey, getSummary,getResults } from "../utils/test";
 import ChooseAnswer from "../components/Test/chooseans";
+import MModal from "../components/UI/modal";
+import ShowSummary from "../components/Test/summary";
 const userInitialState = {
     qid: 'p01',
     selectedAnswer: null,
     markForReview: false,
     userRecord: [],
+    summary: null,
+    finalScore: 0,
+    analytics: null,
 
 }
 const TestPage = (props) => {
+    const navigator = useNavigate()
     const params = useParams()
     const { tid } = params;
+    const [enablePrompt, setenablePrompt] = useState(true)
     const testitem = useSelector(state => state.mock.tests.find((test) => test.tid === parseInt(tid)))
-    // const [currentQues, setcurrentQues] = useState('p01')
     const userReducer = (state, action) => {
         switch (action.type) {
             case 'MFR':
@@ -25,19 +31,23 @@ const TestPage = (props) => {
             case 'SAVE':
                 return { ...state, selectedAnswer: action.answer }
             case 'NEXT':
-                const nextId = (parseInt(state.qid.slice(1)) >= testitem[`${state.qid.slice(0, 1)}ques`]) ? state.qid.slice(0, 1) + '01' : state.qid.slice(0, 1) + '0' + (parseInt(state.qid.slice(1)) + 1).toString()
+                const val = parseInt(state.qid.slice(1))
+                const padme = val >= 9 ? '' : '0'
+                const nextId = (val >= testitem[`${state.qid.slice(0, 1)}ques`]) ? state.qid.slice(0, 1) + '01' : state.qid.slice(0, 1) + padme + (val + 1).toString()
                 const oldRecord = state.userRecord.find((record) => record.qid === nextId)
                 if (oldRecord) {
                     return { ...oldRecord, userRecord: state.userRecord }
                 }
                 return { ...userInitialState, qid: nextId, userRecord: state.userRecord }
             case 'PREV': {
-                const prevId = (parseInt(state.qid.slice(1)) <= 1) ? state.qid.slice(0, 1) + '01' : state.qid.slice(0, 1) + '0' + (parseInt(state.qid.slice(1)) - 1).toString()
+                const val = parseInt(state.qid.slice(1))
+                const padme = val > 10 ? '' : '0'
+                const prevId = (val <= 1) ? state.qid.slice(0, 1) + '01' : state.qid.slice(0, 1) + padme + (val - 1).toString()
                 const oldRecord = state.userRecord.find((record) => record.qid === prevId)
                 if (oldRecord) {
                     return { ...oldRecord, userRecord: state.userRecord }
                 }
-                return { ...userInitialState, qid: nextId, userRecord: state.userRecord }
+                return { ...userInitialState, qid: prevId, userRecord: state.userRecord }
 
 
             }
@@ -63,12 +73,14 @@ const TestPage = (props) => {
                 return { ...userInitialState, qid: state.qid, userRecord: [...state.userRecord, { qid: state.qid, selectedAnswer: state.selectedAnswer, markForReview: state.markForReview }] }
             }
             case 'CLEAR': {
-                const oldRecord = state.userRecord.find((record) => record.qid === state.qid)
-                if (oldRecord) {
-                    return { ...oldRecord, userRecord: state.userRecord }
-                }
-                return { ...userInitialState, qid: state.qid, userRecord: [...state.userRecord, { qid: state.qid, selectedAnswer: state.selectedAnswer, markForReview: state.markForReview }] }
+                const newRecords = state.userRecord.filter((record) => record.qid !== state.qid)
 
+                return { ...userInitialState, qid: state.qid, userRecord: newRecords }
+
+
+            }
+            case 'SUMMARY': {
+                return { ...state, summary: getSummary(state.userRecord, testitem.totalQues) }
 
             }
             default:
@@ -77,7 +89,6 @@ const TestPage = (props) => {
 
     }
     const [user, dispatch] = useReducer(userReducer, userInitialState)
-    console.log('Current state ', user)
 
     const getQues = (qid) => {
         const key = getSubjectKey(qid);
@@ -88,13 +99,37 @@ const TestPage = (props) => {
         dispatch({ type: 'RESET' })
         dispatch({ type: 'UQID', qid })
     }
-    const onSubmitHandler = (isTimeout = false) => {
-        dispatch({type:'RESET'})
-        console.log('Your Test Summary ', getSummary(user.userRecord, testitem.totalQues))
+    const [isModalOpen, setisModalOpen] = useState(false)
+    const [isTimeOut, setisTimeOut] = useState(false)
+    
+    function openModal() {
+        setenablePrompt(false)
+        setisModalOpen(true);
+    }
+    function closeModal() {
+        setisModalOpen(false);
+        setenablePrompt(true);
 
     }
+    const onSubmitHandler = (isTimeout = false) => {
+        dispatch({ type: 'RESET' })
+        dispatch({ type: 'SUMMARY' })
+        setisTimeOut(isTimeOut)
+        openModal()
+
+    }
+    const onFinishTestHandler = () => {
+        navigator('result',{state:getResults(user.userRecord,testitem)})
+    }
+    usePrompt(
+        "Are you sure you want to leave the test?",
+        enablePrompt
+      );
     return (
         <>
+            <MModal title={isTimeOut ? 'Uh Oh Times-up!' : 'Summary'} onClickHandler={onFinishTestHandler} btntxt="Submit" openModal={isModalOpen} onClose={isTimeOut ? null : closeModal}>
+                {user.summary && <ShowSummary summary={user.summary} />}
+            </MModal>
             <THeader onSubmitHandler={onSubmitHandler} duration={testitem.duration} title={testitem.title} />
             <div className="flex flex-col sm:flex-row  items-center">
                 <div>
@@ -107,7 +142,7 @@ const TestPage = (props) => {
                         dispatch({ type: 'RESET' })
                         dispatch({ type: 'PREV' })
 
-                    }} />
+                    }} onClearHandler={() => dispatch({ type: 'CLEAR' })} />
                 </div>
                 <DisplayQues userRecord={user.userRecord} quesChangeHandler={quesChangeHandler} testitem={testitem} qid={user.qid} />
             </div>

@@ -1,15 +1,24 @@
 import { useNavigate } from "react-router";
-const Item= (props)=>{
+import Circle from '../UI/circle';
+const Item = (props) => {
     const navigate = useNavigate();
-    const onClickHandler = ()=>{
+    const onClickHandler = () => {
         navigate({
-            pathname:'/home/jeeitem' + props.id.toString()
+            pathname: '/home/jeeitem/' + props.id.toString()
         })
     }
     return (
-        <div onClick={onClickHandler} className="flex flex-col items-center rounded-lg p-2 m-2 border-solid border-2 border-tertiary bg-gradient-to-br from-yellow-100 to-yellow-600 shadow-md hover:to-secondary hover:border-secondary move-me">
-            <h3 className="font-bold space-x-1">{props.title} </h3>
-            <p className="text-gray-700">{props.id}</p>
+        <div>
+
+            <div onClick={onClickHandler} className="flex w-52 flex-col items-center rounded-lg m-2 border-solid border-2 border-tertiary shadow-md move-me">
+                <img className="w-full" src={props.img} alt='testlogo' />
+                <div className="flex items-center justify-evenly w-full">
+                <Circle className="bg-tertiary inline-block py-1 px-2 text-white">{props.id}</Circle>
+
+<h3 className="font-bold space-x-1">{props.title} </h3>
+
+                </div>
+            </div>
         </div>
     );
 }

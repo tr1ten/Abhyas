@@ -103,56 +103,13 @@ export const initialState = {
     tests:tests,
     items: [
         {
-            id: 1,
-            title: "JEE PHY CHAPTERWISE",
-            description:'Top notch JEE mocks for Phy to asses your readlines',
-            tests: [
-                {
-                    tid: 1,
-                    title: 'mock 1',
-                }
-            ]
 
-        },
-        {
             id: 1,
-            title: "JEE PHY CHAPTERWISE",
-            description:'Top notch JEE mocks for Phy to asses your readlines',
-            tests: [
-                {
-                    tid: 1,
-                    title: 'mock 1',
-                }
-            ]
-
-        },
-        {
-            id: 1,
-            title: "JEE PHY CHAPTERWISE",
-            description:'Top notch JEE mocks for Phy to asses your readlines',
-            tests: [
-                {
-                    tid: 1,
-                    title: 'mock 1',
-                }
-            ]
-
-        },
-        {
-            id: 1,
-            title: "JEE PHY CHAPTERWISE",
-            description:'Top notch JEE mocks for Phy to asses your readlines',
-            tests: [
-                {
-                    tid: 1,
-                    title: 'mock 1',
-                }
-            ]
-
-        },
-        {
-            id: 1,
-            title: "JEE PHY CHAPTERWISE",
+            maxQues:75,
+            maxTime:3,
+            maxMarks:300,
+            img:'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202102/test_exam_timer_1200x768.jpeg?1tCIQgCKb3Kn94aKNdMgRC2cGoRrU1d9&size=770:433',
+            title: "JEE DEMO TEST",
             description:'Top notch JEE mocks for Phy to asses your readlines',
             tests: [
                 {

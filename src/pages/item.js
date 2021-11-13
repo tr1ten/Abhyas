@@ -12,7 +12,7 @@ const ItemPage = (props) => {
         <>
         <Header />
         <Line text={item.title} />
-        <ShowDetails duration="3hr" ques="90" marks="300" description={item.description} />
+        <ShowDetails duration={`${item.maxTime}hr`} ques={item.maxQues} marks={item.maxMarks} description={item.description} />
         <AAChoice />
         <ShowTests tests={item.tests}/>
         </>

@@ -56,15 +56,15 @@ const DisplayQues = (props) => {
             </div>
             <div className="shadow p-1 border-2 rounded-md">
                 <div className='flex flex-row items-center'>
-                    <Circle className="bg-green-600" />
+                    <Circle className=" w-3 h-3 bg-green-600" />
                     <p>Answered</p>
                 </div>
                 <div className='flex flex-row items-center'>
-                    <Circle className="bg-red-600" />
+                    <Circle className=" w-3 h-3 bg-red-600" />
                     <p>Not Answered</p>
                 </div>
                 <div className='flex flex-row items-center'>
-                    <Circle className="bg-purple-600" />
+                    <Circle className="w-3 h-3 bg-purple-600" />
                     <p>Mark for review</p>
                 </div>
 

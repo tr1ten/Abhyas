@@ -33,7 +33,7 @@ const MModal = (props) => {
             style={customStyles}
             contentLabel="do's and don'ts"
         >
-            <div className="text-center p-3 m-0 w-full bg-primary text-white font-bold">
+            <div className="text-center p-3 m-0 w-full bg-gray-400 text-black font-semibold">
                 <h3 className="inline">{props.title}</h3>
             </div>
             {props.children}

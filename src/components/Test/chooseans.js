@@ -7,7 +7,7 @@ const ChooseAnswer= (props)=>{
                 <input onChange={props.onMFRHandler} type='checkbox' className="m-1 border-primary" checked={props.isCheck} />
                 Review
             </Button>
-            <Button className="border-[1px] mx-1 border-primary text-primary font-medium py-1 rounded-md hover:bg-primary hover:text-white">
+            <Button onClick={props.onClearHandler} className="border-[1px] mx-1 border-primary text-primary font-medium py-1 rounded-md hover:bg-primary hover:text-white">
                 Clear
             </Button>
             </div>

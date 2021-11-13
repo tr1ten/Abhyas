@@ -19,7 +19,7 @@ const Test = (props) => {
     function closeModal2() {
         set2IsOpen(false);
     }
-    function startTest(){
+    function startTest() {
         set2IsOpen(false);
         setIsOpen(false);
         navigate(`test${props.tid}/start`)
@@ -29,16 +29,50 @@ const Test = (props) => {
     return (
         <>
             <MModal title="Do's and Don'ts" onClickHandler={openModal2} btntxt="Continue" openModal={modalIsOpen} onClose={closeModal}>
-                <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique esse, eos iure facere voluptatibus consequatur voluptas! Maiores optio eum officiis laborum odio eius porro, voluptate minus est temporibus quos debitis.
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique esse, eos iure facere voluptatibus consequatur voluptas! Maiores optio eum officiis laborum odio eius porro, voluptate minus est temporibus quos debitis.
-                </p>
+                <div className="p-2 m-2">
+                    <h2 className="font-bold text-xl ">Do's</h2>
+                    <h3 className="font-semibold m-1">GENERAL GUIDELINES</h3>
+                    <ul className="list-disc text-sm">
+                        <li>Make Sure Battery stuff</li>
+                        <li>Make Sure to make sure</li>
+
+
+                    </ul>
+                    <h3 className="font-semibold m-1">While taking test</h3>
+                    <ul className="list-disc text-sm">
+                        <li>Begin with your strongest part that is start with chemistry :)</li>
+                        <li>Go through the entire paper,attempt the question you know first </li>
+                        <li>atleast 20-30 min for revision (It help really  :,) </li>
+
+
+                    </ul>
+                    <h2 className="font-bold text-xl ">Don'ts</h2>
+                    <h3 className="font-semibold m-1">GENERAL GUIDELINES</h3>
+                    <ul className="list-disc text-sm">
+                        <li>Don't Cheat pwease := </li>
+
+
+                    </ul>
+
+                </div>
+
             </MModal>
             <MModal title='Instructions' onClickHandler={startTest} btntxt="I AM READY TO BEGIN!" openModal={modal2IsOpen} onClose={closeModal2}>
-                <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique esse, eos iure facere voluptatibus consequatur voluptas! Maiores optio eum officiis laborum odio eius porro, voluptate minus est temporibus quos debitis.
-                
-                </p>
+                <div className="p-2 m-2 ">
+                    <ul className="list-disc text-sm">
+                        <li>Total duration of this test is <span className='font-semibold'>{"180 minutes"}.</span></li>
+                        <li>There will be only(?) <span className='font-semibold'>{"75 questions"}</span> in this test.</li>
+                        <li>There will be 3 section Physics,Chemistry,Maths each having  <span className='font-semibold'>{"25 questions"}</span>.</li>
+                        <li>All are <span className='font-semibold'>Single Choice Type</span>  question.</li>
+                        <li>Marking Scheme would be <span className='font-semibold'>-1 for Incorrect</span>  response and  <span className='font-semibold'>4 for correct</span>.</li>
+
+                    </ul>
+
+                    <p className="my-2">
+                        Etcetera..
+                        Good Luck!
+                    </p>
+                </div>
             </MModal>
 
 
