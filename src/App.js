@@ -9,7 +9,7 @@ import store from "./store";
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL} >
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/home/:item/:id' element={<ItemPage />} />

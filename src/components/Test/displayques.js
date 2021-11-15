@@ -44,7 +44,7 @@ const DisplayQues = (props) => {
 
     }, [props.qid])
     return (
-        <div className="flex  flex-col p-2 border-[1px] rounded-md  shadow-sm ">
+        <div className="flex w-full  flex-col p-2 border-[1px] rounded-md  shadow-sm m-1">
             <div className="flex flex-col sm:flex-row">
                 <div className="p-2 m-1 text-center border-[1px] border-solid rounded-lg shadow">
                     <p>QUESTION PAPER</p>

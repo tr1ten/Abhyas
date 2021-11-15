@@ -10,15 +10,15 @@ const THeader = ({ title,duration,onSubmitHandler }) => {
         hours,
         
       } = useTimer({ expiryTimestamp:time, onExpire: () => onSubmitHandler(true) });
-    
+    const wakt = (seconds<10) ? `${hours}hr:${minutes}m:0${seconds}s` : `${hours}hr:${minutes}m:${seconds}s` 
         return (
             <header className="bg-primary w-full m-0 p-2 flex justify-between items-center">
                 <div className="flex font-bold items-center text-white">
                     <Logo />
                     <h2>{title}</h2>
                 </div>
-                <div className="flex justify-around w-2/5 items-center">
-                    <p className="text-white">{`${hours}hr:${minutes}m:${seconds}s`}</p>
+                <div className="flex justify-around w-2/5 items-center sm:flex-row flex-col">
+                    <p className="text-white">{wakt }</p>
                     <Button onClick={onSubmitHandler} className="text-primary bg-white m-2" >Submit</Button>
                 </div>
 
