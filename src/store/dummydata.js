@@ -1,6 +1,6 @@
 const tests = [
     {
-        tid:1,
+        tid:'one',
         title:'Mock-1',
         duration:60*60*3,
         totalQues:7,
@@ -104,7 +104,7 @@ export const initialState = {
     items: [
         {
 
-            id: 1,
+            id: 'vone',
             maxQues:75,
             maxTime:3,
             maxMarks:300,
@@ -113,8 +113,8 @@ export const initialState = {
             description:'Top notch JEE mocks for Phy to asses your readlines',
             tests: [
                 {
-                    tid: 1,
-                    title: 'mock 1',
+                    tid: tests[0].tid,
+                    title: tests[0].title,
                 }
             ]
 

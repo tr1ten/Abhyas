@@ -6,7 +6,7 @@ const ShowItems = (props) => {
             {props.items.map((item,index) => {
                 const itemkey = `item-${index}`
                 return (
-                    <Item key={itemkey} {...item} />
+                    <Item index={index} key={itemkey} {...item} />
                 );
             })}
         </div>

@@ -1,13 +1,15 @@
-import THeader from "../components/Test/header";
-import { useParams, useNavigate ,usePrompt} from 'react-router-dom';
+import THeader from "../../../../../../components/Test/header";
 import { useSelector } from "react-redux";
-import QuesCard from "../components/Test/question";
+import QuesCard from "../../../../../../components/Test/question";
 import { useReducer, useState } from "react";
-import DisplayQues from "../components/Test/displayques";
-import { getSubjectKey, getSummary,getResults } from "../utils/test";
-import ChooseAnswer from "../components/Test/chooseans";
-import MModal from "../components/UI/modal";
-import ShowSummary from "../components/Test/summary";
+import DisplayQues from "../../../../../../components/Test/displayques";
+import { getSubjectKey, getSummary, getResults } from "../../../../../../utils/test";
+import ChooseAnswer from "../../../../../../components/Test/chooseans";
+import MModal from "../../../../../../components/UI/modal";
+import ShowSummary from "../../../../../../components/Test/summary";
+import { useRouter } from 'next/router';
+import { useDispatch } from "react-redux";
+import { testActions } from "../../../../../../store/test";
 const userInitialState = {
     qid: 'p01',
     selectedAnswer: null,
@@ -19,11 +21,15 @@ const userInitialState = {
 
 }
 const TestPage = (props) => {
-    const navigator = useNavigate()
-    const params = useParams()
-    const { tid } = params;
-    const [enablePrompt, setenablePrompt] = useState(true)
-    const testitem = useSelector(state => state.mock.tests.find((test) => test.tid === parseInt(tid)))
+    const Ledispatch = useDispatch()
+    const router = useRouter();
+    const { tid ,asPath} = router.query;
+    if (!tid) {
+        return null
+    }
+    console.log('tid now ', tid, router.query)
+    const testitem = tid && useSelector(state => state.mock.tests.find((test) => test.tid === tid))
+    console.log('renfering after  ', testitem ,router)
     const userReducer = (state, action) => {
         switch (action.type) {
             case 'MFR':
@@ -94,21 +100,21 @@ const TestPage = (props) => {
         const key = getSubjectKey(qid);
         return testitem[key].find((ques) => ques.id === qid)
     }
-    const quesItem = getQues(user.qid);
+    const quesItem = tid && getQues(user.qid);
     const quesChangeHandler = (qid) => {
         dispatch({ type: 'RESET' })
         dispatch({ type: 'UQID', qid })
     }
     const [isModalOpen, setisModalOpen] = useState(false)
     const [isTimeOut, setisTimeOut] = useState(false)
-    
+
     function openModal() {
-        setenablePrompt(false)
+
         setisModalOpen(true);
     }
     function closeModal() {
         setisModalOpen(false);
-        setenablePrompt(true);
+
 
     }
     const onSubmitHandler = (isTimeout = false) => {
@@ -119,12 +125,9 @@ const TestPage = (props) => {
 
     }
     const onFinishTestHandler = () => {
-        navigator('result',{state:getResults(user.userRecord,testitem)})
+        Ledispatch(testActions.updateResult(getResults(user.userRecord, testitem) ))
+        router.push(`${router.asPath}/result`)
     }
-    usePrompt(
-        "Are you sure you want to leave the test?",
-        enablePrompt
-      );
     return (
         <>
             <MModal title={isTimeOut ? 'Uh Oh Times-up!' : 'Summary'} onClickHandler={onFinishTestHandler} btntxt="Submit" openModal={isModalOpen} onClose={isTimeOut ? null : closeModal}>
@@ -147,6 +150,7 @@ const TestPage = (props) => {
                 <DisplayQues userRecord={user.userRecord} quesChangeHandler={quesChangeHandler} testitem={testitem} qid={user.qid} />
             </div>
         </>
+
     );
 }
 export default TestPage;
