@@ -1,9 +1,9 @@
 import Button from "../UI/button";
 import MModal from "../UI/modal";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import  {useRouter} from 'next/router';
 const Test = (props) => {
-    const navigate = useNavigate();
+    const router = useRouter();
     const [modalIsOpen, setIsOpen] = useState(false);
     function openModal() {
         setIsOpen(true);
@@ -22,7 +22,7 @@ const Test = (props) => {
     function startTest() {
         set2IsOpen(false);
         setIsOpen(false);
-        navigate(`test${props.tid}/start`)
+        router.push(`${router.asPath}/test/${props.tid}`)
 
         return;
     }

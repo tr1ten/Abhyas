@@ -14,7 +14,7 @@ const customStyles = {
 };
 
 const MModal = (props) => {
-    const el = document.getElementById('#root');
+    // const el = document.getElementById('#root');
 
     function afterOpenModal() {
         
@@ -26,7 +26,6 @@ const MModal = (props) => {
 
     return (
         <Modal
-            appElement={el}
             isOpen={props.openModal}
             onAfterOpen={afterOpenModal}
             onRequestClose={props.onClose}
