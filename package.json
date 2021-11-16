@@ -4,14 +4,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.4.0",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "firebase": "^9.4.1",
+    "firebase-admin": "^10.0.0",
+    "js-cookie": "^3.0.1",
     "next": "^12.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-firebase-hooks": "^4.0.1",
+    "react-firebaseui": "^6.0.0",
     "react-modal": "^3.14.4",
     "react-redux": "^7.2.6",
     "react-timer-hook": "^3.0.5",
@@ -23,7 +27,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest --watch",
+    "test:ci": "jest --ci"
   },
   "eslintConfig": {
     "extends": [
