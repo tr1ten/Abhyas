@@ -27,9 +27,7 @@ const TestPage = (props) => {
     if (!tid) {
         return null
     }
-    console.log('tid now ', tid, router.query)
     const testitem = tid && useSelector(state => state.mock.tests.find((test) => test.tid === tid))
-    console.log('renfering after  ', testitem ,router)
     const userReducer = (state, action) => {
         switch (action.type) {
             case 'MFR':

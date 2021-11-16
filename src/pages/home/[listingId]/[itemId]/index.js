@@ -9,9 +9,7 @@ const ItemPage = ({ itemId }) => {
     if (!itemId) {
         return null;
     }
-    console.log('rendering   item page')
     const item = useSelector((state) => state.mock.items.find((item) => item.id === itemId))
-    console.log('here item', item)
     return (
         <>
             <Header />
@@ -44,7 +42,6 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps(context) {
     const itemId = context.params.itemId;
-    console.log('got item id', itemId)
 
     return {
         props: { itemId }

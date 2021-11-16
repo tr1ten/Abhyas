@@ -2,8 +2,9 @@ import Header from "../../components/Abhyas/header";
 import ShowItems from "../../components/Abhyas/showitems";
 import Line from "../../components/UI/line";
 import { useSelector } from "react-redux";
+
 const Home = () => {
-    const items = useSelector((state)=>state.mock.items)
+    const items = useSelector((state) => state.mock.items)
     return (
         <>
             < Header />
@@ -12,4 +13,6 @@ const Home = () => {
         </>
     );
 }
+
+
 export default Home;
