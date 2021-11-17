@@ -7,6 +7,7 @@ const LogOutPage = ({ isSignOut = true }) => {
     const { logout } = useUser();
     useEffect(async () => {
         await logout()
+        
     }, [])
 
     const onClickHandler = () => {
@@ -15,7 +16,7 @@ const LogOutPage = ({ isSignOut = true }) => {
     }
     return (
 
-        <><h1>Logout {isSignOut ? 'Succesfully' : 'Failed'}</h1>
+        <><h1>Logout {isSignOut ? 'Succesfully' : 'Failed'} Click here if you dont automatically redirected !</h1>
             <Button onClick={onClickHandler}>GO HOME</Button></>
     );
 

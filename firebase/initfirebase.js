@@ -15,7 +15,8 @@ const clientCredentials = {
 };
 
 export default function initFirebase() {
-    if (!firebase.apps.length) {
+    console.log('req for init firebase',firebase.apps.length)
+    if (firebase.apps.length===0) {
         firebase.initializeApp(clientCredentials)
         // Check that `window` is in scope for the analytics module!
         if (typeof window !== 'undefined') {
@@ -26,5 +27,8 @@ export default function initFirebase() {
             }
         }
         console.log('Firebase was successfully init.')
+    }
+    else{
+        console.log('already init')
     }
 }

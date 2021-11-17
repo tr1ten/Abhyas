@@ -1,11 +1,12 @@
 import Logo from "./logo";
 import Link from 'next/link';
 import React from "react";
-// import { useUser } from "../../../firebase/useUser";
+import { useUser } from "../../../firebase/useUser";
 
 const Header= ()=>{
-    // const {user} = useUser();
-    const isSignedIn = false;
+    const {user} = useUser();
+    const isSignedIn = !!user;
+    const userProfileUrl = isSignedIn &&  user.profilePic
     return (
         <header className="bg-primary w-full m-0 p-2 flex justify-between items-center">
             <Logo />

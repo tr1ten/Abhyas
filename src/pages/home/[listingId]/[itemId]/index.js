@@ -6,6 +6,7 @@ import ShowDetails from "../../../../components/Abhyas/showitemdetail";
 import AAChoice from "../../../../components/Abhyas/aachoice";
 import ShowTests from "../../../../components/Abhyas/showtests";
 const ItemPage = ({ itemId }) => {
+    console.log('got item id ',itemId)
     if (!itemId) {
         return null;
     }
@@ -23,7 +24,7 @@ const ItemPage = ({ itemId }) => {
 ItemPage.defaultProps = {
     itemId: null
 };
-export async function getStaticPaths() {
+export function getStaticPaths() {
 
 
     return {

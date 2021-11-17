@@ -3,6 +3,7 @@ import Circle from '../UI/circle';
 const Item = (props) => {
     const router = useRouter();
     const onClickHandler = () => {
+        console.log(`pushing to  ${router.asPath}/jeeitem/${props.id}`)
         router.push(`${router.asPath}/jeeitem/${props.id}`
         )
     }

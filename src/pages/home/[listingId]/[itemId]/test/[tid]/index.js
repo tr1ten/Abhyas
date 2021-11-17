@@ -123,7 +123,7 @@ const TestPage = (props) => {
 
     }
     const onFinishTestHandler = () => {
-        Ledispatch(testActions.updateResult(getResults(user.userRecord, testitem) ))
+        Ledispatch(testActions.updateResult({ ...getResults(user.userRecord, testitem),tid  }))
         router.push(`${router.asPath}/result`)
     }
     return (
@@ -133,7 +133,7 @@ const TestPage = (props) => {
             </MModal>
             <THeader onSubmitHandler={onSubmitHandler} duration={testitem.duration} title={testitem.title} />
             <div className="flex flex-col sm:flex-row  items-center">
-                <div>
+                <div className="flex-grow">
                     <QuesCard selectedAnswer={user.selectedAnswer} onSelectAnswer={(choice) => dispatch({ type: 'SAVE', answer: choice })}  {...quesItem} />
                     <ChooseAnswer isCheck={user.markForReview} onMFRHandler={() => dispatch({ type: 'MFR' })} onNextHandler={() => {
                         dispatch({ type: 'RESET' })
@@ -145,7 +145,7 @@ const TestPage = (props) => {
 
                     }} onClearHandler={() => dispatch({ type: 'CLEAR' })} />
                 </div>
-                <DisplayQues userRecord={user.userRecord} quesChangeHandler={quesChangeHandler} testitem={testitem} qid={user.qid} />
+                <DisplayQues className="flex-grow-0" userRecord={user.userRecord} quesChangeHandler={quesChangeHandler} testitem={testitem} qid={user.qid} />
             </div>
         </>
 

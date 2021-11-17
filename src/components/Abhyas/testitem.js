@@ -1,10 +1,14 @@
 import Button from "../UI/button";
 import MModal from "../UI/modal";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import  {useRouter} from 'next/router';
+import { testActions } from "../../store/test";
+import { useDispatch } from "react-redux";
 const Test = (props) => {
     const router = useRouter();
+    const showSummary = props.results ? true : false
     const [modalIsOpen, setIsOpen] = useState(false);
+    const dispatch = useDispatch()
     function openModal() {
         setIsOpen(true);
     }
@@ -25,6 +29,11 @@ const Test = (props) => {
         router.push(`${router.asPath}/test/${props.tid}`)
 
         return;
+    }
+    const  onResultHandler=()=>{
+        dispatch(testActions.updateResult(props.results))
+        router.push(`${router.asPath}/test/${props.results.tid}/result`)
+
     }
     return (
         <>
@@ -81,8 +90,8 @@ const Test = (props) => {
                     <p>Sno.{props.tid}</p>
                 </div>
                 <h3>{props.title}</h3>
-                <Button onClick={openModal} className=" bg-secondary m-1 text-white hover:text-gray-200">
-                    Start
+                <Button onClick={ showSummary? onResultHandler: openModal } className=" bg-secondary m-1 text-white hover:text-gray-200">
+                    {showSummary?"summary" : "Start"} 
                 </Button>
 
             </div></>

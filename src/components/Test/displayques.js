@@ -3,7 +3,7 @@ import Circle from "../UI/circle";
 import ChooseSubject from "./choosesubject";
 import SwitchQues from "./switchques";
 import { getSubjectKey } from "../../utils/test";
-
+import { twMerge } from "tailwind-merge";
 const DisplayQues = (props) => {
     // Hardcoding subject for now but might change latter to add new subjects 
     const [subjects, setsubjects] = useState([{ title: 'Phy', id: 'p', active: true }, { title: 'Maths', id: 'm', active: false }, { title: 'Chem', id: 'c', active: false }])
@@ -44,7 +44,7 @@ const DisplayQues = (props) => {
 
     }, [props.qid])
     return (
-        <div className="flex w-full  flex-col p-2 border-[1px] rounded-md  shadow-sm m-1">
+        <div className={twMerge("flex w-full  flex-col p-2 border-[1px] rounded-md  shadow-sm m-1 ",props.className)}>
             <div className="flex flex-col sm:flex-row">
                 <div className="p-2 m-1 text-center border-[1px] border-solid rounded-lg shadow">
                     <p>QUESTION PAPER</p>

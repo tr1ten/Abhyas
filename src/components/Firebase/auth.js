@@ -4,7 +4,7 @@ import 'firebase/compat/auth'
 import { setUserCookie } from '../../../firebase/userCookies'
 import { mapUserData } from '../../../firebase/mapUserData'
 import initFirebase from '../../../firebase/initfirebase'
-import  firebase from 'firebase/compat/app'
+import firebase from "@firebase/app-compat";
 initFirebase()
 const firebaseAuthConfig = {
     // signInFlow: 'popup',
@@ -22,12 +22,20 @@ const firebaseAuthConfig = {
     signInSuccessUrl: '/home',
     credentialHelper: 'none',
     callbacks: {
-        signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
-            const userData = mapUserData(user)
+        signInSuccess: async (authResult, redirectUrl) => {
+            const userData = mapUserData(authResult)
             setUserCookie(userData)
+            console.log('sucessfully signIn  and updating firestore  ', userData)
+
+            const  doc = firebase.firestore().collection('userTests').doc(userData.id)
+            console.log('here doc',doc)
+            await doc.set({mark:2})
+            console.log('setted')
+            return true;
         },
     },
 }
+
 const FirebaseAuth = () => {
     // Do not SSR FirebaseUI, because it is not supported.
     // https://github.com/firebase/firebaseui-web/issues/213

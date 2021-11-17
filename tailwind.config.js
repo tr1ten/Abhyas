@@ -4,6 +4,11 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      flexGrow: {
+        '0': 0,
+        DEFAULT: 2,
+        '1': 1,
+      },
       colors: {
         primary: '#012955',
         secondary: '#009541',

@@ -1,5 +1,6 @@
 import Circle from "../UI/circle";
 const ShowSummary = ({summary}) => {
+    
     return (<div className="flex flex-col flex-wrap m-2 justify-center">
         <div className='flex flex-row items-center'>
             <Circle className="bg-green-600 text-white p-1 mx-2" >{summary.answered}</Circle>
