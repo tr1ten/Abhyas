@@ -7,7 +7,6 @@ const mockSlice = createSlice(
         reducers:{
             
             fetchItems(state){
-                console.log('Fetching from dumy server...')
                 
             }
         }

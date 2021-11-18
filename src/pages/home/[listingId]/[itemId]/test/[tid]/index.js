@@ -124,7 +124,7 @@ const TestPage = (props) => {
     }
     const onFinishTestHandler = () => {
         Ledispatch(testActions.updateResult({ ...getResults(user.userRecord, testitem),tid  }))
-        router.push(`${router.asPath}/result`)
+        router.replace(`${router.asPath}/result`)
     }
     return (
         <>

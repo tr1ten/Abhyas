@@ -87,11 +87,11 @@ const Test = (props) => {
 
             <div className="flex justify-between shadow-lg p-2 m-2 items-center">
                 <div className="rounded-full ">
-                    <p>Sno.{props.tid}</p>
+                    <p>Sno.{props.index}</p>
                 </div>
                 <h3>{props.title}</h3>
                 <Button onClick={ showSummary? onResultHandler: openModal } className=" bg-secondary m-1 text-white hover:text-gray-200">
-                    {showSummary?"summary" : "Start"} 
+                    {showSummary?"Summary" : "Start"} 
                 </Button>
 
             </div></>

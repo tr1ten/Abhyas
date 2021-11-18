@@ -21,7 +21,6 @@ const useUser = () => {
             .signOut()
             .then(() => {
                 // Sign-out successful.
-                console.log('pushing back home 2 signout')
                 router.push('/home')
             })
             .catch((e) => {

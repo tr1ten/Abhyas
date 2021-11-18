@@ -9,11 +9,9 @@ const ResultPage = () => {
 
     useEffect(async () => {
         if (!!user && result.tid) {
-            console.log('saving to firebase')
             await firebase.firestore().collection('userTests').doc(user.id).update({
                 tests: firebase.firestore.FieldValue.arrayUnion(result)
             });
-            console.log('updated value in firebase')
             // await firebase.firestore().collection('userTests').doc(user.id).set(result)
         }
     }, [user])

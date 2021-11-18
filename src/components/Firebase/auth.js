@@ -25,12 +25,8 @@ const firebaseAuthConfig = {
         signInSuccess: async (authResult, redirectUrl) => {
             const userData = mapUserData(authResult)
             setUserCookie(userData)
-            console.log('sucessfully signIn  and updating firestore  ', userData)
 
-            const  doc = firebase.firestore().collection('userTests').doc(userData.id)
-            console.log('here doc',doc)
-            await doc.set({mark:2})
-            console.log('setted')
+
             return true;
         },
     },
